@@ -4,7 +4,7 @@ class CreateTrips < ActiveRecord::Migration[6.1]
       t.belongs_to :location, null: false, foreign_key: true
       t.belongs_to :travel, null: false, foreign_key: true
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

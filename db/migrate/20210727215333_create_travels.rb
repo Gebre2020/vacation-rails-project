@@ -4,7 +4,7 @@ class CreateTravels < ActiveRecord::Migration[6.1]
       t.string :name
       t.string :address
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end
