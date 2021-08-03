@@ -10,7 +10,8 @@ user1 = User.create(username: "sam", email: "sam@sam.com", password: "sam")
 
 travel1 = Travel.create(name: "Willis Tower", address: "233 S. Wacker Dr.")
 
-location1 = Location.create(user_id: user1.id, city: "Chicago", country: "IL, USA")
+location1 = Location.create(user: user1, city: "Chicago", country: "IL, USA")
 
 Trip.create(location_id: location1.id, travel_id: travel1.id)
+# Trip.create(location: location1, travel: travel1)
 
