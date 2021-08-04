@@ -1,4 +1,16 @@
 <h1>New Location!</h1>
+<% if @location.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@location.errors.count, "error") %> prohibited this location from being saved:</h2>
+
+    <ul>
+      <% @location.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_for(@location) do |f| %>
 
   <%= f.label :city %>
