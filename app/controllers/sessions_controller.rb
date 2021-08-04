@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
         if user && user.authenticate(params[:user][:password])
         # if user.try(:authenticate, params[:user][:password])   
             session[:user_id] = user.id
-            redirect_to user_path(user)
+            redirect_to locations_path
         else
             flash[:message] = "Invalid credentials. Please try again. "
             redirect_to login_path
@@ -24,14 +24,14 @@ class SessionsController < ApplicationController
     def omniauth
         # User.find_or_create_by(name: params["name"])
         # user = User.from_omniauth(auth)
-        User.find_or_create_by(uid: auth['uid'], provider: auth['provider']) do |u|
+        user = User.find_or_create_by(uid: auth['uid'], provider: auth['provider']) do |u|
             u.email = auth['info']['email']
             u.username = auth['info']['name']
             u.password = SecureRandom.hex(15)
         end
         if user.valid? 
           session[:user_id] = user.id
-          flash[:message] = "Successful Login!!"
+          flash[:message] = "Successful Google Login!!"
           redirect_to user_path(user)
         else
            redirect_to login_path
