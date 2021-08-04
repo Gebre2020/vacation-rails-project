@@ -1,5 +1,5 @@
 # vacation-rails-project app
-
+Make a folder and files for a User, Location, Trip, Travel models by using rails g resource
 User
   - username
   - email
