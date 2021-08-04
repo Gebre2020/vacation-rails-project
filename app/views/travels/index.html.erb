@@ -1,0 +1,5 @@
+<h1>All Travels!</h1>
+<% @travels.each do |travel| %>
+  <h3><%= link_to travel.name_and_address, travel_path(travel) %></h3>
+<% end %>
+  
