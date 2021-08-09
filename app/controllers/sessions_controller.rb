@@ -24,11 +24,7 @@ class SessionsController < ApplicationController
     def omniauth
         # User.find_or_create_by(name: params["name"])
         # user = User.from_omniauth(auth)
-        user = User.find_or_create_by(uid: auth['uid'], provider: auth['provider']) do |u|
-            u.email = auth['info']['email']
-            u.username = auth['info']['name']
-            u.password = SecureRandom.hex(15)
-        end
+        user = User.from_omniauth(auth)
         if user.valid? 
           session[:user_id] = user.id
           flash[:message] = "Successful Google Login!!"
@@ -42,7 +38,7 @@ class SessionsController < ApplicationController
 
     def destroy
         session.delete(:user_id)
-        redirect_to locations_path
+        redirect_to root_path
     end
 
     private
