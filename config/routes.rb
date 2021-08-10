@@ -11,8 +11,10 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   resources :travels
-  resources :trips
-  resources :locations
+  resources :trips, only: [:index, :new, :create]
+  resources :locations do
+    resources :trips, shallow: true
+  end
   resources :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
