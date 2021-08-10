@@ -1,0 +1,41 @@
+<h1>Trip Form </h1>
+<% if @trip.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@trip.errors.count, "error") %> prohibited this trip from being saved:</h2>
+
+    <ul>
+      <% @trip.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for(@trip) do |f| %>
+  <%= f.hidden_field :location_id %>
+  <%= f.label :budget %>
+  <%= f.number_field :budget, step: 0.01 %>
+
+<!--
+  <h3>Select an Already Existing location: </h3>
+    <%= f.collection_select :location_id, Location.all, :id, :city %> -
+    <%= f.collection_select :location_id, Location.all, :id, :country %>
+  
+  <h3>Create a new Location</h3>
+  <%= f.fields_for :location do |loc| %>
+    <%= loc.label :city %>
+    <%= loc.text_field :city %>
+    <%= loc.label :country %>
+    <%= loc.text_field :country %>
+  <% end %> -->
+
+  <h3>Create a new Travel</h3>
+  <%= f.fields_for :travel do |t| %>
+    <%= t.label :name %>
+    <%= t.text_field :name %>
+    <%= t.label :address %>
+    <%= t.text_field :address %>
+  <% end %>
+
+   <%= f.submit "Create Trip" %>
+<% end %>
