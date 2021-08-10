@@ -1,4 +1,21 @@
 <h1>Show Page</h1>
+<h2>User Name:- <%= @location.user.username %></h2>
+<h2>Location: <%= @location.city %> - <%= @location.country %></h2>
+
+<% @location.trips.each do |trip| %>
+  <h3>Trip Budget: <%= link_to number_to_currency(trip.budget), trip_path(trip) %></h3>
+ 
+  <% @location.travels.uniq.each do |travel| %>
+    <h3>Travel To: <%=link_to travel.name, travel %> - <%=link_to travel.address, travel %></h3>
+  <% end %>
+  <hr>
+<% end %> 
+
+<%= link_to "See All Trips", location_trips_path(@location) %><br/>
+<%= link_to "Add a New Trips", new_location_trip_path(@location) %>
+
+<!--
 <%= @location.city_and_country %>
 <br>
 <%= link_to "Delete", location_path(@location), method: "delete" %>
+-->
