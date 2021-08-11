@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
             session[:user_id] = user.id
             redirect_to locations_path
         else
-            flash[:message] = "Invalid credentials. Please try again. "
+            flash[:message] = "Sorry, login info was incorrect. Please try again." if !params[:user_id]
             redirect_to login_path
         end
     end
@@ -32,8 +32,7 @@ class SessionsController < ApplicationController
         else
            redirect_to login_path
         end
-        
-       
+   
     end
 
     def destroy
