@@ -1,6 +1,6 @@
 class TripsController < ApplicationController
     before_action :redirect_if_not_logged_in
-    layout "trip"
+    layout "trip" 
     def index
         if params[:location_id] && @location = Location.find_by_id(params[:location_id])
            # nested
@@ -13,18 +13,29 @@ class TripsController < ApplicationController
     end
 
     def show
-        @trip = Trip.find_by_id(params[:id])
+        if params[:location_id]
+            @trip = Location.find_by_id(params[:location_id]).trips.find_by_id(params[:id])
+        else
+            @trip = Trip.find_by_id(params[:id])
+        end
     end
 
     def new
-        @trip = Trip.new(location_id: params[:location_id])   
-       # @trip.build_location 
-        @trip.build_travel
+        if params[:location_id] && @location = Location.find_by_id(params[:location_id])
+            @trip = Trip.new(location_id: params[:location_id])  # or
+             @trip = @location.trips.build
+             @trip.build_travel
+        else
+            @trip = Trip.new
+            @trip.build_location 
+        end 
     end
 
     def create
         @trip = Trip.new(trip_params)
-        # byebug
+        if params[:location_id]
+            @location = Location.find_by_id(params[:location_id])
+        end
         if @trip.save 
             redirect_to trip_path(@trip)
         else
@@ -34,7 +45,17 @@ class TripsController < ApplicationController
     end
 
     def edit 
-        @trip = Trip.find_by_id(params[:id])
+        if params[:location_id]
+            location = Location.find_by(id: params[:location_id])
+            if location.nil?
+              redirect_to locations_path, alert: "Location not found."
+            else
+              @trip = location.trips.find_by(id: params[:id])
+              redirect_to location_trips_path(location), alert: "Trip not found." if @trip.nil?
+            end
+          else
+            @trip = Trip.find_by_id(params[:id])
+          end
     end
 
     def update
