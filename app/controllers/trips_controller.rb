@@ -28,7 +28,8 @@ class TripsController < ApplicationController
         else
             @trip = Trip.new
             @trip.build_location 
-        end 
+            @trip.build_travel
+        end
     end
 
     def create
@@ -53,9 +54,9 @@ class TripsController < ApplicationController
               @trip = location.trips.find_by(id: params[:id])
               redirect_to location_trips_path(location), alert: "Trip not found." if @trip.nil?
             end
-          else
+        else
             @trip = Trip.find_by_id(params[:id])
-          end
+        end
     end
 
     def update
