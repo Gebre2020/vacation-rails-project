@@ -7,7 +7,7 @@ class TripsController < ApplicationController
             @trips = @location.trips
            # @trips = Trip.where(location_id: params[:location_id]).order(:budget)
         else
-            flash[:messaage] = "The Location does't exist"
+            flash[:messaage] = "The Location Doesn't Exist"
             @trips = Trip.all
         end
     end
