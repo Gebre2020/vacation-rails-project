@@ -1,7 +1,5 @@
 <h1>All the Trips</h1>
 <% @trips.each do |trip| %>
+  <li><%= link_to trip.location.city, location_path(trip) %>: - <%= trip.location.country %></li>
   <h3>Trip Budget: <%= link_to number_to_currency(trip.budget), trip_path(trip) %></h3>
 <% end %>
-
-
-
