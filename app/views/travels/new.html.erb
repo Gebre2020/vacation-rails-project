@@ -1,12 +1,13 @@
 <h1>New Travel Form</h1>
 
-<%= form_for(@travel) do |f| %>
+<%= render partial: "layouts/errors", locals: {object: @travel} %>
 
+<%= form_for([@trip,@travel]) do |f| %>
+  <%= f.hidden_field :trip_ids %>
   <%= f.label :name %>
   <%= f.text_field :name %>
-
   <%= f.label :address %>
   <%= f.text_field :address %>
 
-   <%= f.submit "Create Travel" %>
+  <%= f.submit "Create Travel" %>
 <% end %>
