@@ -25,5 +25,13 @@
     <%= loc.text_field :country %>
   <% end %> 
 
+  <h3>Create a new Travel</h3>
+  <%= f.fields_for :travel do |t| %>
+    <%= t.hidden_field :trip_ids %>
+    <%= t.label :name %>
+    <%= t.text_field :name %>
+    <%= t.label :address %>
+    <%= t.text_field :address %>
+  <% end %>
    <%= f.submit "Create Trip" %>
 <% end %>
