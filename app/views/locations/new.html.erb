@@ -1,23 +1,33 @@
 <h1>New Location!</h1>
-<% if @location.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@location.errors.count, "error") %> prohibited this location from being saved:</h2>
-
-    <ul>
-      <% @location.errors.each do |error| %>
-        <li><%= error.full_message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<%= render partial: "layouts/errors", locals: {object: @location} %>
 
 <%= form_for(@location) do |f| %>
 
   <%= f.label :city %>
   <%= f.text_field :city %>
-
   <%= f.label :country %>
   <%= f.text_field :country %>
+  
+  <%= f.fields_for :trips do |t| %>
+    <%= t.label :budget, "Budget Amount: " %>
+    <%= t.number_field :budget, step: 0.01 %>
 
-   <%= f.submit "Create Location" %>
+<!--
+   <h3>Select a Travel</h3>
+    <%= f.label :travel_ids, "Travel Name:" %>
+    <%= f.collection_select :travel_ids, Travel.all, :id, :name %> -
+    <br><br>
+ 
+   <h3>Add New Travel</h3>
+    <% t.fields_for :travel do |trav| %>
+      <%= trav.label :name, "New Travel Name" %>
+      <%= trav.text_field :name %>
+      <%= trav.label :address, "New Travel Address" %>
+      <%= trav.text_field :address %>
+      <br>
+    <% end %> -->
+  <% end %>
+  <br><br>
+
+  <%= f.submit "Create Location" %>
 <% end %>
