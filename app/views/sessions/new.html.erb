@@ -1,5 +1,5 @@
 <h1>Login</h1>
-<%= flash[:message] if flash[:message] %>
+<h3><%= flash[:message] if flash[:message] %></h3>
 
 <%= form_for(:user, url: login_path) do |f|%>
     <%= f.label :username %>
