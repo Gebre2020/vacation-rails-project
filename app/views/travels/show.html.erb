@@ -1,4 +1,6 @@
 <h1>Show Page</h1>
-<%= @travel.name_and_address %>
+<h3><%= @travel.name_and_address %></h3>
 <br>
-<%= link_to "Delete", travel_path(@travel), method: "delete" %>
+<%= link_to "Edit", edit_travel_path(@travel) %> |
+<%= link_to "Back", travels_path %>
+<!--<%= link_to "Delete", travel_path(@travel), method: "delete" %>-->
