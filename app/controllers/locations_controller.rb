@@ -17,10 +17,18 @@ class LocationsController < ApplicationController
     end
 
     def new
-      @location = Location.new  
-      t = @location.trips.build
-      t.build_travel
-      # @location.build_user 
+      if params[:user_id] && @user = User.find_by_id(params[:user_id])
+        @location = Location.new(user_id: params[:user_id])
+        #@location = Location.new  
+        l = @location.trips.build
+        l.build_travel
+        # @location.build_user 
+      else
+        @error = "The user doesn't exist" if !params[:user_id]
+        @location = Location.new
+        @location.trips.build
+        #@location.build_user
+      end
     end
 
     def create
@@ -35,10 +43,12 @@ class LocationsController < ApplicationController
     end
 
     def edit
+      redirect_to locations_path if !@location || @location.user != current_user
       @location = Location.find_by_id(params[:id])
     end
 
     def update
+      redirect_to locations_path if !@location || @location.user != current_user
       @location = Location.find_by_id(params[:id])
       @location.update(location_params)
       if @location.valid?
