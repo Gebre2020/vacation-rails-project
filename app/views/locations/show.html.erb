@@ -4,23 +4,14 @@
 
 <h2> Location: <%= link_to @location.city, location_path %> - <%= link_to @location.country, location_path %></h2>
 
-<br/>
-<% @location.trips.each do |trip| %>
-  <h3>Trip Budget: <%= link_to number_to_currency(trip.budget), trip_path(trip) %></h3>
- 
-  <% @location.travels.uniq.each do |travel| %>
-    <h3>Travel To: <%=link_to travel.name, travel %> - <%=link_to travel.address, travel %></h3>
-  <% end %>
-  <hr>
-<% end %> 
 
-<%= link_to "Edit Location", edit_location_path(@location) %> |
-<%= link_to "Back To Locations", locations_path %> |
+<!--<%= render partial: "trips/trip", collection: @location.trips %> -->
+<%= render @location.trips %>
+
 <%= link_to "Add a New Trips", new_location_trip_path(@location) %> |
 <%= link_to "See All Trips", location_trips_path(@location) %> <br><br>
 
-<!--
-<%= @location.city_and_country %>
-<br>
+<%= link_to "Edit Location", edit_location_path(@location) %> |
+<%= link_to "Back To Locations", locations_path %> |
 <%= link_to "Delete", location_path(@location), method: "delete" %>
--->
+<!--<%= @location.city_and_country %>-->
