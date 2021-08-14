@@ -1,5 +1,1 @@
-<%= form_for(@trip) do |f| %>
-  <%= f.label :budget %>
-  <%= f.number_field :budget, step: 0.01 %>
-  <%= f.submit "Update Trip" %>
-<% end %>
+<%= render partial: "form" %>
