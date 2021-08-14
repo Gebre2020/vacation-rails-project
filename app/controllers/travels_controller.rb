@@ -15,7 +15,7 @@ class TravelsController < ApplicationController
         t = @travel.trips.build 
         t.build_location
         #@travel.locations.build   
-        #t.build_travel  
+        t.build_travel  
     end
 
     def create
@@ -50,7 +50,7 @@ class TravelsController < ApplicationController
 
     private
     def travel_params
-        params.require(:travel).permit(:name, :address)
+       params.require(:travel).permit(:name, :address, :trip_id)
     end
         
 end
