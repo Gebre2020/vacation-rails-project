@@ -1,8 +1,10 @@
-<h1>Trip Show Page</h1>
+<h1> SHOW PAGE</h1>
 
-<h1>Trip Budget Amount:- <%= number_to_currency(@trip.budget) %></h1>
-<h2>Location Place:- <%= link_to @trip.location.city, location_path(@trip.location) if @trip.location %> -  <%= link_to @trip.location.country, location_path(@trip.location) if @trip.location %></h2>
+<%= trip_price %>
 
+<h2>Location Place:- <%= @trip.city_and_country if @trip.location %></h2>
 <h2>Travel To:- <%= @trip.travel.name_and_address %></h2>
 
-
+<%= link_to "Edit", edit_trip_path(@trip) %> |
+<%= link_to "Back", trips_path %> |
+<!--<%= link_to "Delete", trip_path(@trip), method: "delete" %>-->
