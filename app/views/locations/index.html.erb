@@ -1,8 +1,8 @@
 <h1>All Locations</h1>
 <h2>User Name:- <%= @current_user.username %></h2>
 
-<% current_user.locations.each do |loc| %>
-  <h2><%= link_to loc.city_and_country, location_path(loc) %></h2>
-  <%= link_to "Add Budget Amount: ", new_location_trip_path(loc.id) %><hr>
+<% current_user.locations.each do |location| %>
+  <h2><%= link_to location.city_and_country, location_trips_path(location) %></h2>
 <% end %>
 
+ 
