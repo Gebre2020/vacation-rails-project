@@ -1,13 +1,13 @@
 class TripsController < ApplicationController
     before_action :redirect_if_not_logged_in
     layout "trip" 
-    def index
+    def index    
         if params[:location_id] && @location = Location.find_by_id(params[:location_id])
            # nested
             @trips = @location.trips
            # @trips = Trip.where(location_id: params[:location_id]).order(:budget)
         else
-            flash[:messaage] = "The Location Doesn't Exist"
+            flash[:messaage] = "The Location Doesn't Exist!!!"
             @trips = Trip.all
         end
     end
@@ -18,12 +18,19 @@ class TripsController < ApplicationController
         else
             @trip = Trip.find_by_id(params[:id])
         end
+    end 
+
+    def most_expensive  # custom routing
+        # @trips = Trip.order_by_price
+        # @trips = Trip.order_by_price.most_expensive
+        @trips = Trip.most_expensive.order_by_price
+        render :index, layout: "random"
     end
 
     def new
         if params[:location_id] && @location = Location.find_by_id(params[:location_id])
             @trip = Trip.new(location_id: params[:location_id])  # or
-             @trip = @location.trips.build
+            # @trip = @location.trips.build
              @trip.build_travel
         else
             @trip = Trip.new
@@ -69,12 +76,14 @@ class TripsController < ApplicationController
         end
     end
 
-    def destroy  
+    def destroy 
     end
 
     private
+
     def trip_params
         params.require(:trip).permit(:budget, :location_id, location_attributes: [:city, :country], travel_attributes: [:name, :address])
     end
+
 end
         
