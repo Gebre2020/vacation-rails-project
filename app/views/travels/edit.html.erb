@@ -1,5 +1,7 @@
 <h1>Edit Travel Form</h1>
 
+<%= render partial: "layouts/errors", locals: {object: @travel} %>
+
 <%= form_for(@travel) do |f| %>
 
   <%= f.label :name %>
