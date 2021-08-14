@@ -1,0 +1,19 @@
+<%= render partial: "layouts/errors", locals: {object: @trip} %>
+
+<%= form_for([@location, @trip]) do |f| %>
+  <%= f.hidden_field :location_id %>
+  <%= f.label :budget %>
+  <%= f.number_field :budget, step: 0.01 %>
+
+  <%= location_field_helper(f) %>
+
+  <h3>Create a new Travel</h3>
+  <%= f.fields_for :travel do |t| %>
+    <%= t.hidden_field :trip_ids %>
+    <%= t.label :name %>
+    <%= t.text_field :name %>
+    <%= t.label :address %>
+    <%= t.text_field :address %>
+  <% end %>
+    <%= f.submit  %>
+<% end %>
