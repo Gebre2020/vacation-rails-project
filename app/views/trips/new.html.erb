@@ -1,32 +1,3 @@
-<h1>Trip Form </h1>
-<%= render partial: "layouts/errors", locals: {object: @trip} %>
+<%= form_header_location %>
 
-<%= form_for([@location, @trip]) do |f| %>
-  <%= f.hidden_field :location_id %>
-  <%= f.label :budget %>
-  <%= f.number_field :budget, step: 0.01 %>
-
-<% if @location %>
-  <%= f.hidden_field :location_id, value: @location.id %>
-<% else %>
-  <h3>Select an Already Existing location: </h3>
-  <%= f.collection_select :location_id, Location.all, :id, :city %> 
-    
-  <h3>Create a new Location</h3>
-  <%= f.fields_for :location do |loc| %>
-    <%= loc.label :city %>
-    <%= loc.text_field :city %>
-    <%= loc.label :country %>
-    <%= loc.text_field :country %>
-  <% end %> 
-<%end%>
-  <h3>Create a new Travel</h3>
-  <%= f.fields_for :travel do |t| %>
-    <%= t.hidden_field :trip_ids %>
-    <%= t.label :name %>
-    <%= t.text_field :name %>
-    <%= t.label :address %>
-    <%= t.text_field :address %>
-  <% end %>
-    <%= f.submit "Create Trip" %>
-<% end %>
+<%= render partial: "form" %>
