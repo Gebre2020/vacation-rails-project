@@ -1,18 +1,18 @@
 class LocationsController < ApplicationController
-    before_action :redirect_if_not_logged_in
-
-    def index
-      
+    before_action :redirect_if_not_logged_in?
+    before_action :find_location, only: [:show, :update, :edit, :destroy]
+    
+    def index  
       if params[:user_id] && @user = User.find_by_id(params[:user_id])
         @locations = @user.locations.all
       else
         flash[:message] = "The user doesn't exist" if params[:user_id]
         @locations = Location.all
       end
+      # @locations = Location.city_selector(params[:location][:city]) if params[:location] && !params[:location][:city].blank?
     end
 
     def show
-      @location = Location.find_by_id(params[:id])
       redirect_to locations_path if !@location
     end
 
@@ -24,7 +24,7 @@ class LocationsController < ApplicationController
         l.build_travel
         # @location.build_user 
       else
-        @error = "The user doesn't exist" if !params[:user_id]
+        @error = "The user doesn't exist!!" if !params[:user_id]
         @location = Location.new
         @location.trips.build
         #@location.build_user
@@ -44,12 +44,10 @@ class LocationsController < ApplicationController
 
     def edit
       redirect_to locations_path if !@location || @location.user != current_user
-      @location = Location.find_by_id(params[:id])
     end
 
     def update
       redirect_to locations_path if !@location || @location.user != current_user
-      @location = Location.find_by_id(params[:id])
       @location.update(location_params)
       if @location.valid?
         redirect_to location_path(@location)
@@ -59,13 +57,16 @@ class LocationsController < ApplicationController
     end
 
     def destroy
-      @location = Location.find_by_id(params[:id])
       @location.destroy 
       redirect_to locations_path
     end
 
   private
     def location_params
-        params.require(:location).permit(:city, :country, :user_id, travel_ids:[], user_attributes:[:username], trips_attributes:[:budget, :travel_id, travels_attributes:[:name, :address]])
+        params.require(:location).permit(:city, :country, :user_id, travel_ids:[], trips_attributes:[:budget, :travel_id, travels_attributes:[:name, :address]])
     end
+
+    def find_location
+      @location = Location.find(params[:id])
+  end
 end
