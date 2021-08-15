@@ -1,22 +1,26 @@
 class TripsController < ApplicationController
-    before_action :redirect_if_not_logged_in
+    before_action :redirect_if_not_logged_in?
+    before_action :find_trip, only: [:show, :update, :edit, :destroy]
     layout "trip" 
     def index    
         if params[:location_id] && @location = Location.find_by_id(params[:location_id])
-           # nested
+            # nested
             @trips = @location.trips
-           # @trips = Trip.where(location_id: params[:location_id]).order(:budget)
+            # @trips = @location.trips.limit(1)
+            # @trips = Trip.where(location_id: params[:location_id]).order(:budget)
         else
             flash[:messaage] = "The Location Doesn't Exist!!!"
-            @trips = Trip.all
-        end
+            @trips = Trip.order_by_budget
+        end 
+        
+        
     end
 
     def show
         if params[:location_id]
             @trip = Location.find_by_id(params[:location_id]).trips.find_by_id(params[:id])
         else
-            @trip = Trip.find_by_id(params[:id])
+           # @trip = Trip.find(params[:id])
         end
     end 
 
@@ -62,12 +66,11 @@ class TripsController < ApplicationController
               redirect_to location_trips_path(location), alert: "Trip not found." if @trip.nil?
             end
         else
-            @trip = Trip.find_by_id(params[:id])
+            #@trip = Trip.find(params[:id])
         end
     end
 
     def update
-        @trip = Trip.find_by_id(params[:id])
         @trip.update(trip_params)
         if @trip.valid?
             redirect_to trip_path(@trip)
@@ -80,10 +83,13 @@ class TripsController < ApplicationController
     end
 
     private
-
+     
     def trip_params
         params.require(:trip).permit(:budget, :location_id, location_attributes: [:city, :country], travel_attributes: [:name, :address])
     end
-
+    
+    def find_trip
+        @trip = Trip.find(params[:id])
+    end
 end
         
