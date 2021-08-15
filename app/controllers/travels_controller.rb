@@ -1,13 +1,14 @@
 class TravelsController < ApplicationController
 
-  before_action :redirect_if_not_logged_in
+  before_action :redirect_if_not_logged_in?
+  before_action :find_travel, only: [:show, :update, :edit, :destroy]
 
     def index
-        @travels = Travel.all
+        @travels = Travel.order_by_name
     end
 
     def show
-        @travel = Travel.find_by_id(params[:id])
+       
     end
 
     def new
@@ -29,11 +30,11 @@ class TravelsController < ApplicationController
     end
 
     def edit
-        @travel = Travel.find_by_id(params[:id])
+       
     end
 
     def update
-        @travel = Travel.find_by_id(params[:id])
+      
         @travel.update(travel_params)
         if @travel.valid?
           redirect_to travel_path(@travel)
@@ -43,14 +44,16 @@ class TravelsController < ApplicationController
     end
 
     # def destroy
-    #     @travel = Travel.find_by_id(params[:id])
     #     @travel.destroy 
     #     redirect_to travels_path
     # end
 
     private
     def travel_params
-       params.require(:travel).permit(:name, :address, :trip_id)
+      params.require(:travel).permit(:name, :address, :trip_id)
     end
-        
+      
+    def find_travel
+      @travel = Travel.find(params[:id])
+    end
 end
