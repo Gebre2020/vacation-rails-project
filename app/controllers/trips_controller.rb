@@ -79,8 +79,10 @@ class TripsController < ApplicationController
         end
     end
 
-    def destroy 
-    end
+    # def destroy
+    #     @trip.destroy 
+    #     redirect_to trips_path 
+    # end
 
     private
      
