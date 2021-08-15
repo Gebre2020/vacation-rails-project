@@ -8,8 +8,8 @@
 <!--<%= render partial: "trips/trip", collection: @location.trips %> -->
 <%= render @location.trips %>
 
-<%= link_to "Add a New Trips", new_location_trip_path(@location) %> |
-<%= link_to "See All Trips", location_trips_path(@location) %> <br><br>
+<%= link_to "Add New Location Trip", new_location_trip_path(@location) %> |
+<%= link_to "All Location Trips", location_trips_path(@location) %> <br><br>
 
 <%= link_to "Edit Location", edit_location_path(@location) %> |
 <%= link_to "Back To Locations", locations_path %> |
