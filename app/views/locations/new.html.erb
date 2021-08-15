@@ -2,7 +2,7 @@
 <%= render partial: "layouts/errors", locals: {object: @location} %>
 
 <%= form_for(@location) do |f| %>
-
+<%= f.hidden_field :user_id %>
  <%= render partial: "form", locals: {fp: f} %>
   
   <h3>Add Trip Budget</h3>
