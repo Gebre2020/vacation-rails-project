@@ -24,7 +24,7 @@ class Location < ApplicationRecord
   #     end
   #   end
   # end
-
+  scope :baller_trips, -> {joins(:trips).where('trips.budget > 2').group('locations.city')}
   #alphabetize the list of locations
   #scope :alpha, -> {'city'}
   # scope :alpha, -> {order(:city)}
