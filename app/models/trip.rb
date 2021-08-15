@@ -22,10 +22,13 @@ class Trip < ApplicationRecord
     "#{self.location.city} - #{self.location.country}"
   end
 
-  def self.order_by_price  # custom queries
-    # self.order(:budget)
-    self.order(budget: :desc).limit(4)
-  end
+  scope :order_by_budget, -> {order(budget: :desc)}
+  
+
+  # def self.order_by_budget  # custom queries
+  #   # self.order(:budget)
+  #   self.order(budget: :desc).limit(4)
+  # end
  
   def self.most_expensive
     self.where("budget > 1500")
