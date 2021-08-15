@@ -24,17 +24,17 @@ class LocationsController < ApplicationController
         l.build_travel
         # @location.build_user 
       else
-        @error = "The user doesn't exist!!" if !params[:user_id]
         @location = Location.new
         @location.trips.build
         #@location.build_user
       end
     end
 
-    def create
+    def create 
+      # @user = current_user
       @location = current_user.locations.build(location_params)
       #@location = Location.new(location_params)
-      #@location.user_id = session[:user_id]
+      @location.user_id = session[:user_id]
         if @location.save 
           redirect_to location_path(@location)
         else
