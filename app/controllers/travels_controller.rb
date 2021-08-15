@@ -4,7 +4,7 @@ class TravelsController < ApplicationController
   before_action :find_travel, only: [:show, :update, :edit, :destroy]
 
     def index
-        @travels = Travel.order_by_name
+        @travels = Travel.order_by_name.uniq
     end
 
     def show
@@ -15,8 +15,8 @@ class TravelsController < ApplicationController
         @travel = Travel.new
         t = @travel.trips.build 
         t.build_location
-        #@travel.locations.build   
-        t.build_travel  
+        # @travel.locations.build   
+        # t.trips.build 
     end
 
     def create
