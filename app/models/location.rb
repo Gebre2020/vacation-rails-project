@@ -7,7 +7,10 @@ class Location < ApplicationRecord
   
   validates :city, presence: true, length: {minimum: 2, message: "has to be longer than 2!!!"}
   validates :country, presence: true, uniqueness: {scope: :city}
+
   
+  # scope :city_selector, -> (city) {where('city == ?', city)}
+
   # def travels_attributes=(attributes)
   #   attributes.values.each do |v|
   #     self.travels << Travel.find_or_create_by(v) if !v['name']
@@ -21,12 +24,11 @@ class Location < ApplicationRecord
   #     end
   #   end
   # end
-  
+
   #alphabetize the list of locations
   #scope :alpha, -> {'city'}
   # scope :alpha, -> {order(:city)}
-
-
+  
   def city_and_country
     "#{self.city} - #{self.country}"
   end
