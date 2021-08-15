@@ -1,6 +1,13 @@
 <h1>All Locations</h1>
 <h2>User Name:- <%= @current_user.username %></h2>
 
+<!--
+<h1> Filter By City:</h1>
+<%= form_tag(locations_path, method: "get") do %>
+  <%= collection_select :location, :city, Location.select(:city).distinct, :city, :city, {:include_blank => 'Choose City'} %>
+  <%= submit_tag "Filter" %>
+<% end %>-->
+
 <% current_user.locations.each do |location| %>
   <h2><%= link_to location.city_and_country, location_trips_path(location) %></h2>
 <% end %>
