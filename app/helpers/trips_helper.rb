@@ -12,7 +12,7 @@ module TripsHelper
 
     def index_header_location
          if @location
-            content_tag(:h1, "A Location: '#{@location.city} - #{@location.country}' Trip of Budgets:-")
+            content_tag(:h1, "A Location: '#{@location.city} - #{@location.country}'")
          else
             content_tag(:h1, "All the Trips!!")
          end
@@ -20,7 +20,7 @@ module TripsHelper
 
     def form_header_location
         if @location
-           content_tag(:h1, "Create: '#{@location.city} - #{@location.country}' Trip of Budgets:-")
+           content_tag(:h1, "Create Location: '#{@location.city} - #{@location.country}' ")
         else
            content_tag(:h1, "Create Trip!")
         end
