@@ -12,8 +12,10 @@
 
   <body style="background: lightblue;"> 
   <%= render 'layouts/navigation' %>
-    <% flash.each do |type,msg| %>
-      <%= msg %>
+    <% flash.each do |type, msg| %>
+      <div class="error_message">
+        <%= msg %> 
+      </div>  
     <% end %> 
     <%= @error %>
     <%= yield %>
