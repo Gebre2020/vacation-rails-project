@@ -3,5 +3,5 @@
     
   <h3>Create a new Location</h3>
   <%= f.fields_for :location do |loc| %>
-    <%= render partial: "locations/form", locals: {fp: f} %>
+    <%= render partial: "locations/form", locals: {fp: loc} %>
   <% end %> 
