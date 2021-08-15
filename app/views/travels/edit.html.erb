@@ -3,12 +3,7 @@
 <%= render partial: "layouts/errors", locals: {object: @travel} %>
 
 <%= form_for(@travel) do |f| %>
-
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-
-  <%= f.label :address %>
-  <%= f.text_field :address %>
+  <%= render partial: "form", locals: {f: f} %>
 
    <%= f.submit "Update Travel" %>
 <% end %>
