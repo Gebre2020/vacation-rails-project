@@ -4,10 +4,7 @@
 
 <%= form_for([@trip,@travel]) do |f| %>
   <%= f.hidden_field :trip_ids %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :address %>
-  <%= f.text_field :address %>
+    <%= render partial: "form", locals: {f: f} %>
 
   <%= f.submit "Create Travel" %>
 <% end %>
