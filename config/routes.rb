@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  root to: 'sessions#welcome'
   get '/trips/most_expensive', to: 'trips#most_expensive'
+  root to: 'sessions#welcome'
   get '/auth/google_oauth2/callback', to: 'sessions#omniauth'
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
