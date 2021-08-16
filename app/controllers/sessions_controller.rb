@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
         if user && user.authenticate(params[:user][:password])
         # if user.try(:authenticate, params[:user][:password])   
             session[:user_id] = user.id
-            redirect_to root_path
+            redirect_to locations_path
         else
             flash[:message] = "Sorry, login info was incorrect. Please try again." if !params[:user_id]
             redirect_to login_path
@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
         if user.valid? 
           session[:user_id] = user.id
           flash[:message] = "Successful Google Login!!"
-          redirect_to locations_path
+          redirect_to user_path(user)
         else
            redirect_to login_path
         end
