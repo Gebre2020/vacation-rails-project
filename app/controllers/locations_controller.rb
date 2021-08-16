@@ -36,7 +36,7 @@ class LocationsController < ApplicationController
       #@location = Location.new(location_params)
       @location.user_id = session[:user_id]
         if @location.save 
-          redirect_to location_path(@location)
+          redirect_to locations_path
         else
           render :new
         end
