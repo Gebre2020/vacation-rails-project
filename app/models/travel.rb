@@ -5,8 +5,10 @@ class Travel < ApplicationRecord
     accepts_nested_attributes_for :trips
     validates :name, presence: true
     # validation comes from active record method to protct the database
-    validates :address, presence: true, uniqueness: {scope: :name}
+    validates :address, presence: true
     #validate :too_many_travel
+    
+    
     scope :order_by_name, -> {order(:name)}
 
     def name_and_address
