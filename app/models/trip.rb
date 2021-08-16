@@ -24,7 +24,7 @@ class Trip < ApplicationRecord
 
   scope :order_by_budget, -> {order(budget: :desc)}
   
-
+  
   # def self.order_by_budget  # custom queries
   #   # self.order(:budget)
   #   self.order(budget: :desc).limit(4)
