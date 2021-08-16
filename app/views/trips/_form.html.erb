@@ -3,9 +3,9 @@
 <%= form_for([@location, @trip]) do |f| %>
   <%= f.hidden_field :location_id %>
   <%= f.label :budget %>
-  <%= f.number_field :budget, step: 0.01 %>
-
-  <%= location_field_helper(f) %>
+  <%= f.number_field :budget, step: 0.01 %><br>
+<h2>Select Location City:</h2>
+ <%= f.collection_select :location_id, Location.all, :id, :city %>
 
   <h3>Create a new Travel</h3>
   <%= f.fields_for :travel do |t| %>
