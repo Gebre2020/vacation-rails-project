@@ -5,12 +5,12 @@
 <%= f.hidden_field :user_id %>
  <%= render partial: "form", locals: {fp: f} %>
   
+<!--
   <h3>Add Trip Budget</h3>
   <%= f.fields_for :trips do |t| %>
     <%= t.label :budget, "Budget Amount: " %>
     <%= t.number_field :budget, step: 0.01 %>
 
-<!--
    <h3>Select a Travel</h3>
     <%= f.label :travel_ids, "Travel Name:" %>
     <%= f.collection_select :travel_ids, Travel.all, :id, :name %> -
@@ -23,8 +23,8 @@
       <%= trav.label :address, "New Travel Address" %>
       <%= trav.text_field :address %>
       <br>
-    <% end %> -->
-  <% end %>
+    <% end %>
+  <% end %>-->
   <br><br>
 
   <%= f.submit "Create Location" %>

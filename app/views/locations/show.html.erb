@@ -2,8 +2,8 @@
 
 <h2>User Name:- <%= @location.user.username %></h2>
 
-<h2> Location: <%= link_to @location.city, location_path %> - <%= link_to @location.country, location_path %></h2>
 
+<h2>Location: <%= link_to @location.city_and_country, location_trips_path(@location) %></h2>
 
 <!--<%= render partial: "trips/trip", collection: @location.trips %> -->
 <%= render @location.trips %>
