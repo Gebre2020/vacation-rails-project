@@ -2,7 +2,7 @@
 <%= render partial: "layouts/errors", locals: {object: @location} %>
 
 <%= form_for(@location) do |f| %>
-<%= f.hidden_field :user_id %>
+
  <%= render partial: "form", locals: {fp: f} %>
   
 <!--
@@ -10,10 +10,10 @@
   <%= f.fields_for :trips do |t| %>
     <%= t.label :budget, "Budget Amount: " %>
     <%= t.number_field :budget, step: 0.01 %>
-
+  
    <h3>Select a Travel</h3>
-    <%= f.label :travel_ids, "Travel Name:" %>
-    <%= f.collection_select :travel_ids, Travel.all, :id, :name %> -
+    <%= t.label :travel_ids, "Travel Name:" %>
+    <%= t.collection_select :travel_id, Travel.all, :id, :name %> -
     <br><br>
  
    <h3>Add New Travel</h3>
@@ -24,7 +24,7 @@
       <%= trav.text_field :address %>
       <br>
     <% end %>
-  <% end %>-->
+  <% end %> -->
   <br><br>
 
   <%= f.submit "Create Location" %>
