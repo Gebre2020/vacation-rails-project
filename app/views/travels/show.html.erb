@@ -1,5 +1,6 @@
 <h1>Show Page</h1>
 <h3><%= @travel.name_and_address %></h3>
+<%= render @travel.trips %>  
 <br>
 <%= link_to "Edit", edit_travel_path(@travel) %> |
 <%= link_to "Back", travels_path %> 
