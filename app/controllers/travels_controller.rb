@@ -7,8 +7,7 @@ class TravelsController < ApplicationController
         @travels = Travel.order_by_name.uniq
     end
 
-    def show
-       
+    def show   
     end
 
     def new
@@ -33,8 +32,7 @@ class TravelsController < ApplicationController
        
     end
 
-    def update
-      
+    def update   
         @travel.update(travel_params)
         if @travel.valid?
           redirect_to travel_path(@travel)
