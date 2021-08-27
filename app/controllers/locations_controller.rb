@@ -16,25 +16,15 @@ class LocationsController < ApplicationController
       redirect_to locations_path if !@location
     end
 
-    def new
-      if params[:user_id] && @user = User.find_by_id(params[:user_id])
-        @location = Location.new(user_id: params[:user_id])
-        #@location = Location.new  
-        l = @location.trips.build
-        l.build_travel
-        # @location.build_user 
-      else
-        @location = Location.new
-        @location.trips.build
-        #@location.build_user
-      end
+    def new   
+      @location = Location.new
+      @location.trips.build
+      #@location.build_user    
     end
 
     def create 
       # @user = current_user
       @location = current_user.locations.build(location_params)
-      #@location = Location.new(location_params)
-      @location.user_id = session[:user_id]
         if @location.save 
           redirect_to locations_path
         else
@@ -63,7 +53,7 @@ class LocationsController < ApplicationController
 
   private
     def location_params
-        params.require(:location).permit(:city, :country, :user_id, travel_ids:[], trips_attributes:[:budget, :travel_id, travels_attributes:[:name, :address]])
+        params.require(:location).permit(:city, :country, :user_id, trips_attributes:[:budget, :travel_id, travel_attributes:[:name, :address]])
     end
 
     def find_location
