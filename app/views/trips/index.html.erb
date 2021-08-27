@@ -1,13 +1,17 @@
 
 <%= index_header_location %>
-
+<% if !@location %>
 <%= render @trips %>  
+<% else %>
+ <%= link_to "Add New Location Trip", new_location_trip_path(@location) %> 
+ <% end %>
 
-<!--<%= render partial: "trip", collection: @trips %>-->
-
+<!--
+<%= render @trips %> 
+<% #Or %>
+<%= render partial: "trip", collection: @trips %>-->
+<% #Or %>
 <!--
 <% @trips.each do |trip| %>
   <%= render partial: "trip", locals: {trip: trip} %>
 <% end %>-->
-
-  
