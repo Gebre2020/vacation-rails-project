@@ -2,11 +2,10 @@
 
 <h2>User Name:- <%= @location.user.username %></h2>
 
-
 <h2>Location: <%= link_to @location.city_and_country, location_trips_path(@location) %></h2>
 
 <!--<%= render partial: "trips/trip", collection: @location.trips %> -->
-<%= render @location.trips %>
+<%= render @location.trips %>  
 
 <%= link_to "Add New Location Trip", new_location_trip_path(@location) %> |
 <%= link_to "All Location Trips", location_trips_path(@location) %> <br><br>
